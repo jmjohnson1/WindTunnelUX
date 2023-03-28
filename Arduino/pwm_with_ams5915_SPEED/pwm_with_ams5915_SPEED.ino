@@ -14,7 +14,7 @@ const uint8_t addr_p4 = 0x11;
 bfs::Ams5915 p1(&Wire, addr_p1, bfs::Ams5915::AMS5915_0020_D_B, 0);
 bfs::Ams5915 p2(&Wire, addr_p2, bfs::Ams5915::AMS5915_0020_D_B, 0);
 bfs::Ams5915 p3(&Wire, addr_p3, bfs::Ams5915::AMS5915_0020_D, 0);
-bfs::Ams5915 p4(&Wire, addr_p4, bfs::Ams5915::AMS5915_0020_D);
+bfs::Ams5915 p4(&Wire, addr_p4, bfs::Ams5915::AMS5915_0020_D, 0);
 
 // Values needed for fan setting
 const int pwm_pin = 6; // Pin for the fan's PWM signal
@@ -80,15 +80,15 @@ void CollectAMSData(bfs::Ams5915 sensor, int purpose, String name) {
 
   // Print to serial with tabs separating pressure and temp and a return
   Serial.print(name);
+  //Serial.print("\t");
+  //Serial.print(pres_cnts);
+  //Serial.print("\t");
+  //Serial.print(pres_mbar);
   Serial.print("\t");
-  Serial.print(pres_cnts);
+	Serial.print(press);
   Serial.print("\t");
-  Serial.print(pres_mbar);
-  Serial.print("\t");
-  Serial.print(press);
-  Serial.print("\t");
-  Serial.print(temp);
-  Serial.print("\t");
+  //Serial.print(temp);
+  //Serial.print("\t");
   Serial.println(extra_val);
 }
 
@@ -116,10 +116,10 @@ void loop() {
     Serial.read();
   }
   // Print pwr to the serial line for debug purposes
-  CollectAMSData(p1, 2, "A1");
-  CollectAMSData(p2, 0, "A2");
-  CollectAMSData(p3, 1, "D1");
-  CollectAMSData(p4, 1, "D2");
+  CollectAMSData(p1, 2, "1");
+  CollectAMSData(p2, 0, "2");
+  CollectAMSData(p3, 1, "3");
+  CollectAMSData(p4, 1, "4");
 
 }
 
