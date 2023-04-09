@@ -11,9 +11,9 @@ const uint8_t addr_p3 = 0x12;
 const uint8_t addr_p4 = 0x11;
 
 // Using the AMS5915 library by Brian Taylor (Bolder Flight Systems)
-bfs::Ams5915 p1(&Wire, addr_p1, bfs::Ams5915::AMS5915_0020_D_B, 0);
-bfs::Ams5915 p2(&Wire, addr_p2, bfs::Ams5915::AMS5915_0020_D_B, 0);
-bfs::Ams5915 p3(&Wire, addr_p3, bfs::Ams5915::AMS5915_0020_D, 0);
+bfs::Ams5915 p1(&Wire, addr_p1, bfs::Ams5915::AMS5915_0020_D_B, 28);
+bfs::Ams5915 p2(&Wire, addr_p2, bfs::Ams5915::AMS5915_0020_D_B, 2000);
+bfs::Ams5915 p3(&Wire, addr_p3, bfs::Ams5915::AMS5915_0020_D, 33);
 bfs::Ams5915 p4(&Wire, addr_p4, bfs::Ams5915::AMS5915_0020_D, 0);
 
 // Values needed for fan setting
