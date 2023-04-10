@@ -12,7 +12,7 @@ Note that you will need to copy the directory Arduino/libs/ams5915 to your Ardui
 The files located in src/ -- perhaps not the greatest name for the directory -- include various Matlab scripts and the Matlab app. Some scripts only exist for feature testing and will be removed later.
 
 # User Interface Architecture
-![[images/UX_Logic.png]]
+![UX Logic](images/UX_Logic.png)
 
 The overall idea is to have a timer in the Matlab GUI that continually updates the GUI after a certain time interval. That update involves reading in data from the Arduino serial port that contains the pressure and the airspeed or angle of attack. This information needs to be sent to the relative GUI components, such as the plots and gauges.
 
