@@ -24,34 +24,45 @@ function [caliConst, caliOffset] = calibrate(makePlots)
     caliConst = [caliConst1, caliConst3, caliConst4];
     caliOffset = [-caliArray(10, 5), 0, 0];
     if makePlots
-        figure(1)
-        plot(caliArray(s4Idx, 2), caliArray(s4Idx, 2) - caliArray(s4Idx, 5), 'r.-');
+        sens4Fig = figure(1);
+        plot(caliArray(s4Idx, 2), caliArray(s4Idx, 2) - caliArray(s4Idx, 5), 'r.-', MarkerSize=12, LineWidth=2);
         hold on
-        plot(caliArray(s4Idx, 2), caliArray(s4Idx, 2) - caliArray(s4Idx, 5)*caliConst4, 'b.-');
+        plot(caliArray(s4Idx, 2), caliArray(s4Idx, 2) - caliArray(s4Idx, 5)*caliConst4, 'b.-', MarkerSize=12, LineWidth=2);
         hold off
         title('Sensor 4')
-        legend('Raw', 'Calibrated')
+        legend('Raw', 'Calibrated', Location="northwest")
         ylabel('Error (Pa)')
         xlabel('Differential Pressure (Pa)')
+        grid on
+        grid minor
         
+        sens1Fig = figure(2);
         figure(2)
-        plot(caliArray(s1Idx, 2), caliArray(s1Idx, 2) - caliArray(s1Idx, 5), 'r.-');
+        plot(caliArray(s1Idx, 2), caliArray(s1Idx, 2) - caliArray(s1Idx, 5), 'r.-', MarkerSize=12, LineWidth=2);
         hold on
-        plot(caliArray(s1Idx, 2), caliArray(s1Idx, 2) - (caliArray(s1Idx, 5) - caliArray(10, 5))*caliConst1, 'b.-');
+        plot(caliArray(s1Idx, 2), caliArray(s1Idx, 2) - (caliArray(s1Idx, 5) - caliArray(10, 5))*caliConst1, 'b.-', MarkerSize=12, LineWidth=2);
         hold off
         title('Sensor 1')
-        legend('Raw', 'Calibrated')
+        legend('Raw', 'Calibrated', Location="northwest")
         ylabel('Error (Pa)')
         xlabel('Differential Pressure (Pa)')
+        grid on
+        grid minor
         
-        figure(3)
-        plot(caliArray(s3Idx, 2), caliArray(s3Idx, 5), 'r.-');
+        sens3Fig = figure(3);
+        plot(caliArray(s3Idx, 2), caliArray(s3Idx, 5), 'r.-', MarkerSize=12, LineWidth=2);
         hold on
-        plot(caliArray(s3Idx, 2), caliArray(s3Idx, 2) - caliArray(s3Idx, 5)*caliConst3, 'b.-');
+        plot(caliArray(s3Idx, 2), caliArray(s3Idx, 2) - caliArray(s3Idx, 5)*caliConst3, 'b.-', MarkerSize=12, LineWidth=2);
         hold off
         title('Sensor 3')
-        legend('Raw', 'Calibrated')
+        legend('Raw', 'Calibrated', Location="northwest")
         ylabel('Error (Pa)')
         xlabel('Differential Pressure (Pa)')
+        grid on
+        grid minor
+
+        print(sens1Fig, 'Sensor1Calibration', '-dsvg')
+        print(sens3Fig, 'Sensor3Calibration', '-dsvg')
+        print(sens4Fig, 'Sensor4Calibration', '-dsvg')
     end
 end
