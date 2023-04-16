@@ -1,15 +1,25 @@
 % Open the serial port connected to the arduino
 port_name = "/dev/ttyACM1";
 sp = serialport(port_name, 9600);
+
 flush(sp);
 
 data = readData(sp, 1000);
 delete(sp);
 
-p1_dat = data(data(:, 1)==1, :);
-p2_dat = data(data(:, 1)==2, :);
-p3_dat = data(data(:, 1)==3, :);
-p4_dat = data(data(:, 1)==4, :);
+%%% CHANGE THIS VALUE! %%%
+SENSOR = 1;
+
+p_dat = data(data(:, 1)==SENSOR, :);
+aspd_mean = mean(p_dat(:, 3));
+
+tunnel_aspd = input("Enter Tunnel Speed (m/s): ");
+error = tunnel_aspd - aspd_mean;
+
+
+    
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% FUNCTIONS %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

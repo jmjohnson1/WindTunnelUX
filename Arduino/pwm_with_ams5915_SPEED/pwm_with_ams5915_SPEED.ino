@@ -10,11 +10,14 @@ const uint8_t addr_p2 = 0x1E;
 const uint8_t addr_p3 = 0x12;
 const uint8_t addr_p4 = 0x11;
 
+// Absolute pressure sensor address:
+const uint8_t addr_abs = 0x5D;	
+
 // Using the AMS5915 library by Brian Taylor (Bolder Flight Systems)
-bfs::Ams5915 p1(&Wire, addr_p1, bfs::Ams5915::AMS5915_0020_D_B, 28);
-bfs::Ams5915 p2(&Wire, addr_p2, bfs::Ams5915::AMS5915_0020_D_B, 2000);
+bfs::Ams5915 p1(&Wire, addr_p1, bfs::Ams5915::AMS5915_0020_D_B, 18);
+bfs::Ams5915 p2(&Wire, addr_p2, bfs::Ams5915::AMS5915_0020_D_B, 2040);
 bfs::Ams5915 p3(&Wire, addr_p3, bfs::Ams5915::AMS5915_0020_D, 33);
-bfs::Ams5915 p4(&Wire, addr_p4, bfs::Ams5915::AMS5915_0020_D, 0);
+bfs::Ams5915 p4(&Wire, addr_p4, bfs::Ams5915::AMS5915_0020_D, 85);
 
 // Values needed for fan setting
 const int pwm_pin = 6; // Pin for the fan's PWM signal
@@ -22,7 +25,7 @@ int pwr           = 0; // Determines the command sent to the fan as a percentage
 int write_val     = 0; // The value that will be sent over analogWrite()
 
 // Density. Kind of a placeholder.
-float rho = 1.225;
+float rho = 1.14523;
 
 
 void setup() {
@@ -80,8 +83,8 @@ void CollectAMSData(bfs::Ams5915 sensor, int purpose, String name) {
 
   // Print to serial with tabs separating pressure and temp and a return
   Serial.print(name);
-  //Serial.print("\t");
-  //Serial.print(pres_cnts);
+  // Serial.print("\t");
+  // Serial.print(pres_cnts);
   //Serial.print("\t");
   //Serial.print(pres_mbar);
   Serial.print("\t");
@@ -109,17 +112,24 @@ void loop() {
   analogWrite(6, write_val);
 
   // Check if the user has input a change to the power setting.
-  if(Serial.available()) 
+  if(Serial.available()) {
     // Set pwr to be the user's new desired value
     pwr = Serial.parseInt();   // parse the power setting from serial
     while (Serial.available() != 0 ) {
     Serial.read();
+	}
   }
-  // Print pwr to the serial line for debug purposes
+
   CollectAMSData(p1, 2, "1");
   CollectAMSData(p2, 0, "2");
   CollectAMSData(p3, 1, "3");
   CollectAMSData(p4, 1, "4");
-
 }
 
+void findAbsPressure() {
+		
+}
+
+void pressureCorrection() {
+
+}
