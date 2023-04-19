@@ -35,4 +35,18 @@ After updating the vectors with a new data point at the end, the plots are updat
 The timer is activated when the user clicks the "Connect" button, and it is deleted if the app is closed or the user clicks "Disconnect". When it is started, the selected serial port is also opened.
 
 ### Angle of Attack Calculation
-Not yet implemented.
+
+The LookUpTable .m-file will read in data from an Arduino and use a lookup table
+   with stored values for the differential pressures qCM and dPa based on a given AOA for a 
+   pitot under testing.
+   
+   AOA = ƒ(dPA/qCM)
+   ƒ = function: 3-D table lookup
+   
+   Nomenclature:
+
+  AOA = Probe Angle of attack
+  dPA = differential pressure between the top and bottom alpha ports
+  qCM = Ptm-Psm = measured total pressure minus measured static pressure
+  Psm = average of the two alpha ports
+   
