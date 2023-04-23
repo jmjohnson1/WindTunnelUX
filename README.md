@@ -2,16 +2,15 @@
 User interface for desktop wind tunnel.
 
 # Arduino
-The microcontroller code is located in the "Arudino" directory. For the sake of documentation,
-several versions of the program exist. Once a final version is created, the other programs will be
-condemned to the rubbish bin.
+The microcontroller program is located in the Arduino directory along with libraries that it depends
+on. It sets up continual communication with the pressure sensors and outputs the values over the
+serial port, including the calculated airspeed for Sensors 3 and 4. On initial startup, it computes
+the density from an absolute pressure and temperature sensor.
 
-Current version: pwm_with_ams5915_SPEED
-
-Note that you will need to copy the directory Arduino/libs/ams5915 to your Arduino libraries folder.
-This contains class definitions for the AMS pressure sensors that are used in the Arduino program.
-This library was originally created by Brian Taylor at Bolder Flight Systems, and slightly modified
-for this project by James Johnson.
+Note that if you plan to compile and upload using the Arduino IDE, you will need to copy the
+directory Arduino/libs/ams5915 to your Arduino libraries folder. This contains class definitions for
+the AMS pressure sensors that are used in the Arduino program. This library was originally created
+by Bolder Flight Systems and *slightly* modified for this project by James Johnson.
 
 # Source files
 The files located in src/ -- perhaps not the greatest name for the directory -- include various
@@ -58,7 +57,7 @@ After updating the vectors with a new data point at the end, the plots are updat
 The timer is activated when the user clicks the "Connect" button, and it is deleted if the app is
 closed or the user clicks "Disconnect". When it is started, the selected serial port is also opened.
 
-NOTE: If one selects the wrong serial port, then the app will likely crash. Choose wisely.
+**NOTE: If one selects the wrong serial port, then the app will likely crash. Choose wisely.**
 
 ### Angle of Attack Calculation
 
