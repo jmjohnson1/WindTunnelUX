@@ -1,6 +1,14 @@
 # WindTunnelUX
 User interface for desktop wind tunnel.
 
+# Usage Instructions
+Upon initializing the application, you need to select the serial port that the Arduino is connected
+to. This is done with the dropdown menu shown, which should list all the available serial ports.
+If the Arduino is plugged in after opening the app, then the refresh button can be used to fetch an
+updated list of available ports.
+
+**NOTE: If one selects the wrong serial port, then the app will likely crash. Choose wisely.**
+
 # Arduino
 The microcontroller program is located in the Arduino directory along with libraries that it depends
 on. It sets up continual communication with the pressure sensors and outputs the values over the
