@@ -1,4 +1,4 @@
-function [alphaPortPressure, dynamicPressure, AOA_grid] = LookupTable()
+function [alphaPortPressure, dynamicPressure, AOA_grid] = makeLookupTable()
     [caliMultiple, caliOffset] = calibrate(0);
     SENSOR1_CALIBRATION_MULTIPLE = caliMultiple(1);
     SENSOR1_CALIBRATION_OFFSET = caliOffset(1);
