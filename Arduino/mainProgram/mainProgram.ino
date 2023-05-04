@@ -64,6 +64,7 @@ void setup() {
 	// Set the abs pressure sensor to one shot mode
 	absSensor.setDataRate(LPS35HW_RATE_ONE_SHOT);
 	getDensity();
+  //Serial.println(rho);
 }
 
 void CollectAMSData(bfs::Ams5915 sensor, int purpose, int name) {
@@ -77,10 +78,11 @@ void CollectAMSData(bfs::Ams5915 sensor, int purpose, int name) {
 		temp      = sensor.die_temp_c();
 		pres_mbar = sensor.pres_mbar();
 	}
+  float pressCorrected = pressureCorrection(press, name);
 	// Determine what the sensor is used for (i.e. speed or aoa). This will
 	// determine what is printed in the "extra_val" column of the serial line
 	if (name == 3 || name == 4) {
-		extra_val = calcAirspeed(press);
+		extra_val = calcAirspeed(pressCorrected);
 	}
 
 	// Print to serial with tabs separating pressure and temp and a return
@@ -90,7 +92,7 @@ void CollectAMSData(bfs::Ams5915 sensor, int purpose, int name) {
 	//Serial.print("\t");
 	//Serial.print(pres_mbar);
 	Serial.print("\t");
-	Serial.print(press);
+	Serial.print(pressCorrected);
 	Serial.print("\t");
 	//Serial.print(temp);
 	//Serial.print("\t");
@@ -134,6 +136,8 @@ float getDensity() {
 	temperature = absSensor.readTemperature() + 273.15f; // Kelvin
 	pressure = absSensor.readPressure() * 100; // Pa
 	rho = pressure / (287.0f * temperature);
+  //Serial.println(pressure);
+  //Serial.println(temperature);
 }
 
 float pressureCorrection(float pressure, int name) {
@@ -144,17 +148,17 @@ float pressureCorrection(float pressure, int name) {
 	switch (name) {
 		case 1: {
 			multiple = CALIBRATION_MULT_P1;
-			offset = CALIBRATION_OFST_P1;
+			offset = CALIBRATION_OFST_P1 + 5.48f;
 			break;
 		}
 		case 3: {
 			multiple = CALIBRATION_MULT_P3;
-			offset = CALIBRATION_OFST_P3;
+			offset = CALIBRATION_OFST_P3 - .45989f;
 			break;
 		}
 		case 4: {
 			multiple = CALIBRATION_MULT_P4;
-			offset = CALIBRATION_OFST_P4;
+			offset = CALIBRATION_OFST_P4 - .45817f;
 			break;
 		}
 		default: {
