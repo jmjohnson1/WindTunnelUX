@@ -21,10 +21,10 @@ function [Table_AOA] = interpAoa(arduino_alphaPortPressure, arduino_dynamicPress
 %     end
 
     % To visualize the surface, uncomment the following lines
-     figure;
-     plot(surfacefit, [alphaPortPressure(:), dynamicPressure(:)], AOA_grid(:));
-     xlabel('alphaPortPressure');
-     ylabel('dynamicPressure');
-     zlabel('AOA');
-     title('Surface Fit');
+     % figure;
+     % plot(surfacefit, [alphaPortPressure(:), dynamicPressure(:)], AOA_grid(:));
+     % xlabel('alphaPortPressure');
+     % ylabel('dynamicPressure');
+     % zlabel('AOA');
+     % title('Surface Fit');
 end
