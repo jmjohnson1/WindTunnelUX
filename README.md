@@ -1,13 +1,28 @@
 # WindTunnelUX
 User interface for desktop wind tunnel.
 
+# Installation Instructions
+## Prerequisites
+- At least Matlab R2023a
+- Cuve Fitting Toolbox
+
+## Run from source
+You can choose to run the app from the source files or the provided package. To run from source, you
+just need to clone this repository open "Interface.mlapp" in Matlab.
+
+## Use the installation package
+An Matlab app installation package is provided in the Releases section. The only file needed is
+"WindTunnelInterface.mlappinstall". In Matlab, navigate to the "APPS" ribbon tab, and select
+"Install App". Open the .mlappinstall file in the dialog that appears. The app should now be
+accessible from the toolbar.
+
 # Usage Instructions
 Upon initializing the application, you need to select the serial port that the Arduino is connected
 to. This is done with the dropdown menu shown, which should list all the available serial ports.
 If the Arduino is plugged in after opening the app, then the refresh button can be used to fetch an
 updated list of available ports.
 
-**NOTE: If one selects the wrong serial port, then the app will likely crash. Choose wisely.**
+**NOTE: If the wrong serial port is selected, then the app will likely crash. Choose wisely.**
 
 # Arduino
 The microcontroller program is located in the Arduino directory along with libraries that it depends

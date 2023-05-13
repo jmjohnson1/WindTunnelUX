@@ -20,7 +20,6 @@ function [alphaPortPressure, dynamicPressure, AOA_grid] = makeLookupTable()
             p1_datCorrected = sensor1Correction(in.p1_dat(:, 2));
             p3_datCorrected = sensor3Correction(in.p3_dat(:, 2));
             alphaPortPressure(i, j) = mean(p1_datCorrected);
-            %dynamicPressure(i, j) = mean(p3_datCorrected);
             dynamicPressure(i, j) = 1/2*1.14*setSpeed(j)^2;
         end
     end
