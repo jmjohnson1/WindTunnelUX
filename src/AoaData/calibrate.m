@@ -1,5 +1,19 @@
 function [caliConst, caliOffset] = calibrate(makePlots)
-    
+    % DESCRIPTION:
+    %   Determines the calibration constants for the pressure sensors assuming a
+    %   linear error profile between the sensor output and the reference value
+    % SYNOPSIS:
+    %   [caliConst, caliOffset] = calibrate(makePlots)
+    % INPUTS:
+    %   makePlots       bool        If true, the function will produce a plot of
+    %                               the error vs. dynamic pressure for each 
+    %                               sensor
+    % OUTPUTS:
+    %   caliConst       (1, 3)      Slope of the calibration curve for each
+    %                               sensor
+    %   caliOffset      (1, 3)      y-intercept of the calibration curve for
+    %                               each sensor
+
     jointArray = parse();
     caliIdx = 1:15;
     caliArray = str2double([jointArray(caliIdx, 4), jointArray(caliIdx, 5), jointArray(caliIdx, 3), ...
@@ -23,6 +37,8 @@ function [caliConst, caliOffset] = calibrate(makePlots)
 
     caliConst = [caliConst1, caliConst3, caliConst4];
     caliOffset = [-caliArray(10, 5), 0, 0];
+
+    % Plotting
     if makePlots
         sens4Fig = figure(1);
         plot(caliArray(s4Idx, 2), caliArray(s4Idx, 2) - caliArray(s4Idx, 5), 'r.-', MarkerSize=12, LineWidth=2);

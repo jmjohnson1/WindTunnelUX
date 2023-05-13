@@ -1,4 +1,18 @@
-function [Table_AOA] = interpAoa(arduino_alphaPortPressure, arduino_dynamicPressure)
+function [intAoa] = interpAoa(arduino_alphaPortPressure, arduino_dynamicPressure)
+    % DESCRIPTION:
+    %   Interpolate the angle of attack from alpha port pressure and dynamic
+    %   pressure using cubic interpolation and linear extrapolation of the
+    %   lookup table created by makeLookupTable()
+    % SYNOPSIS:
+    %   [intAoa] = interpAoa(arduino_alphaPortPressure, arduino_dynamicPressure)
+    % INPUTS:
+    %   arduino_alphaPortPressure   (1, 1)      Alpha port differential pressure
+    %                                           measured on the arduino
+    %   arduino_dynamicPressure     (1, 1)      Dynamic pressure from reference
+    %                                           pitot measured on ardiuno
+    % OUTPUTS:
+    %   intAoa      (1, 1)      Interpolated (or extrapolated) angle of attack
+
     load("LookupTable.mat", "AOA_grid", "alphaPortPressure", "dynamicPressure");
     
     % Expand
@@ -15,10 +29,7 @@ function [Table_AOA] = interpAoa(arduino_alphaPortPressure, arduino_dynamicPress
     else    
         load("surfacefit.mat", "surfacefit");
     end
-    Table_AOA = surfacefit(arduino_alphaPortPressure,arduino_dynamicPressure);
-%     if isnan(Table_AOA)
-%         Table_AOA = 0;
-%     end
+    intAoa = surfacefit(arduino_alphaPortPressure,arduino_dynamicPressure);
 
     % To visualize the surface, uncomment the following lines
      % figure;

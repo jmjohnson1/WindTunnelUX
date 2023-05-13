@@ -4,7 +4,7 @@ User interface for desktop wind tunnel.
 # Installation Instructions
 ## Prerequisites
 - At least Matlab R2023a
-- Cuve Fitting Toolbox
+- Curve Fitting Toolbox
 
 ## Run from source
 You can choose to run the app from the source files or the provided package. To run from source, you
