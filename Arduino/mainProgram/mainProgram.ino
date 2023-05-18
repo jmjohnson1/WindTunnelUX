@@ -13,9 +13,9 @@ const uint8_t ADDR_P4 = 0x11;
 const float CALIBRATION_MULT_P1 = 0.7683;
 const float CALIBRATION_MULT_P3 = 1.9135;
 const float CALIBRATION_MULT_P4 = 1.9207;
-const float CALIBRATION_OFST_P1 = -8.6780;
-const float CALIBRATION_OFST_P3 = 0;
-const float CALIBRATION_OFST_P4 = 0;
+float CALIBRATION_OFST_P1 = -8.6780;
+float CALIBRATION_OFST_P3 = 0;
+float CALIBRATION_OFST_P4 = 0;
 
 // Absolute pressure sensor address:
 const uint8_t ADDR_ABS = 0x5D;	
@@ -65,6 +65,10 @@ void setup() {
 	absSensor.setDataRate(LPS35HW_RATE_ONE_SHOT);
 	getDensity();
   //Serial.println(rho);
+
+	CALIBRATION_OFST_P1 = p1.pres_pa();
+	CALIBRATION_OFST_P3 = p3.pres_pa();
+	CALIBRATION_OFST_P4 = p4.pres_pa();
 }
 
 void CollectAMSData(bfs::Ams5915 sensor, int purpose, int name) {
@@ -148,17 +152,17 @@ float pressureCorrection(float pressure, int name) {
 	switch (name) {
 		case 1: {
 			multiple = CALIBRATION_MULT_P1;
-			offset = CALIBRATION_OFST_P1 + 5.48f;
+			offset = CALIBRATION_OFST_P1;
 			break;
 		}
 		case 3: {
 			multiple = CALIBRATION_MULT_P3;
-			offset = CALIBRATION_OFST_P3 - .45989f;
+			offset = CALIBRATION_OFST_P3;
 			break;
 		}
 		case 4: {
 			multiple = CALIBRATION_MULT_P4;
-			offset = CALIBRATION_OFST_P4 - .45817f;
+			offset = CALIBRATION_OFST_P4;
 			break;
 		}
 		default: {
@@ -166,6 +170,6 @@ float pressureCorrection(float pressure, int name) {
 			offset = 0;
 		}
 	}
-	correctedPressure = (pressure + offset)*multiple;
+	correctedPressure = (pressure)*multiple - offset;
 	return correctedPressure;
 }
